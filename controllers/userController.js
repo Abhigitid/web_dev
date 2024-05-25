@@ -148,7 +148,7 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
   const resetToken = await user.getResetToken();
 
   await user.save();
-  const url = `${process.env.FRONTEND_URL}/resetPassword${resetToken}`;
+  const url = `${process.env.FRONTEND_URL}/resetPassword/${resetToken}`;
 
   const message = `Click on the link to reset password, ${url}. If you have not requested then please ignore.`;
   //send token via email
@@ -157,7 +157,7 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: `Email sent to ${user.email}`,
+    message: `Reset Token has been sent to ${user.email}`,
   });
 });
 
